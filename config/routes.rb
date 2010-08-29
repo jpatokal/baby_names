@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :languages, :has_many => :names
   map.resources :names
-
-  map.resources :languages
 
   # The priority is based upon order of creation: first created -> highest priority.
 

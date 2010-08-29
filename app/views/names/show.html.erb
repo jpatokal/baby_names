@@ -1,23 +1,25 @@
+<h1>Name in @language.english </h1>
+
 <p>
-  <b>Script:</b>
-  <%=h @name.script %>
+ <b>Script:</b>
+ <%=h @name.script %>
 </p>
 
 <p>
-  <b>Latin:</b>
-  <%=h @name.latin %>
+ <b>Latin:</b>
+ <%=h @name.latin %>
 </p>
 
 <p>
-  <b>Normalized:</b>
-  <%=h @name.normalized %>
+ <b>Normalized:</b>
+ <%=h @name.normalized %>
 </p>
 
 <p>
-  <b>Language:</b>
-  <%=h @name.language %>
+ <b>Language:</b>
+ <%=h @language.english %>
 </p>
 
 
-<%= link_to 'Edit', edit_name_path(@name) %> |
-<%= link_to 'Back', names_path %>
+<%= link_to 'Edit', edit_language_name_path(@language, @name) %> |
+<%= link_to 'Back', language_names_path(@language) %>

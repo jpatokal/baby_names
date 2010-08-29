@@ -8,6 +8,23 @@
   <%=h @language.local %>
 </p>
 
+<h2>Names</h2>
+<% @language.names.each do |name| %>
+<p>
+  <b>Script:</b>
+  <%=h name.script %>
+</p>
+<p>
+  <b>Latin:</b>
+  <%=h name.latin %>
+</p>
+<p>
+  <b>Normalized:</b>
+  <%=h name.normalized %>
+</p>
+<% end %> 
 
-<%= link_to 'Edit', edit_language_path(@language) %> |
-<%= link_to 'Back', languages_path %>
+<%= link_to 'Edit language', edit_language_path(@language) %> |
+<%= link_to 'Back', languages_path %> |
+<%= link_to 'Manage names', language_names_path(@language) %> 
+
