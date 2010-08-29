@@ -1,0 +1,23 @@
+<p>
+  <b>Script:</b>
+  <%=h @name.script %>
+</p>
+
+<p>
+  <b>Latin:</b>
+  <%=h @name.latin %>
+</p>
+
+<p>
+  <b>Normalized:</b>
+  <%=h @name.normalized %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%=h @name.language %>
+</p>
+
+
+<%= link_to 'Edit', edit_name_path(@name) %> |
+<%= link_to 'Back', names_path %>

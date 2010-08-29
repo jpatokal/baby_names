@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  script: MyString
+  latin: MyString
+  normalized: MyString
+  language: 
+
+two:
+  script: MyString
+  latin: MyString
+  normalized: MyString
+  language: 

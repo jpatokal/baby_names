@@ -1,0 +1,28 @@
+<h1>Editing name</h1>
+
+<% form_for(@name) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :script %><br />
+    <%= f.text_field :script %>
+  </p>
+  <p>
+    <%= f.label :latin %><br />
+    <%= f.text_field :latin %>
+  </p>
+  <p>
+    <%= f.label :normalized %><br />
+    <%= f.text_field :normalized %>
+  </p>
+  <p>
+    <%= f.label :language %><br />
+    <%= f.text_field :language %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @name %> |
+<%= link_to 'Back', names_path %>

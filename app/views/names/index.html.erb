@@ -1,0 +1,26 @@
+<h1>Listing names</h1>
+
+<table>
+  <tr>
+    <th>Script</th>
+    <th>Latin</th>
+    <th>Normalized</th>
+    <th>Language</th>
+  </tr>
+
+<% @names.each do |name| %>
+  <tr>
+    <td><%=h name.script %></td>
+    <td><%=h name.latin %></td>
+    <td><%=h name.normalized %></td>
+    <td><%=h name.language %></td>
+    <td><%= link_to 'Show', name %></td>
+    <td><%= link_to 'Edit', edit_name_path(name) %></td>
+    <td><%= link_to 'Destroy', name, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New name', new_name_path %>
