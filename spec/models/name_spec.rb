@@ -11,6 +11,7 @@ describe Name do
     it "should not match if the normalized names are different" do
       Name.create(:normalized => "Foo").should_not == Name.create(:normalized => "Bar")
     end
+
   end
 
 end
