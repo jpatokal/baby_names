@@ -17,7 +17,19 @@ describe Name do
   describe '#normalize' do
 
     it "should set the normalized name to the latin name" do
-      Name.create(:latin => "Foo").normalize!.should == Name.create(:normalized => "Foo")
+      Name.create(:latin => "Foo", :normalized => "Bar").normalize!.should == Name.create(:normalized => "Foo")
+    end
+
+  end
+
+  describe '#save' do
+
+    it "should create a normalized name if none was given" do
+      Name.create(:latin => "Foo").normalized.should == "Foo"
+    end
+
+    it "should not create a normalized name if one was given" do
+      Name.create(:latin => "Foo", :normalized => "Bar").normalized.should == "Bar"
     end
 
   end

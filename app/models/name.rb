@@ -9,4 +9,8 @@ class Name < ActiveRecord::Base
     self.normalized = self.latin
     self
   end
+
+  def save
+    self.normalize! unless self.normalized
+  end
 end
