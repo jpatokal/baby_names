@@ -1,2 +1,24 @@
-<h1>Names#edit</h1>
-<p>Find me in app/views/names/edit.html.erb</p>
+<h1>Editing name</h1>
+
+<% form_for([@language, @name]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :script %><br />
+    <%= f.text_field :script %>
+  </p>
+  <p>
+    <%= f.label :latin %><br />
+    <%= f.text_field :latin %>
+  </p>
+  <p>
+    <%= f.label :normalized %><br />
+    <%= f.text_field :normalized %>
+  </p>
+ <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', language_name_path(@language , @name) %> |
+<%= link_to 'Back', language_names_path(@language) %>
