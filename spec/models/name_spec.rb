@@ -14,4 +14,12 @@ describe Name do
 
   end
 
+  describe '#normalize' do
+
+    it "should set the normalized name to the latin name" do
+      Name.create(:latin => "Foo").normalize!.should == Name.create(:normalized => "Foo")
+    end
+
+  end
+
 end

@@ -4,4 +4,9 @@ class Name < ActiveRecord::Base
   def ==(name)
     self.normalized == name.normalized
   end
+
+  def normalize!
+    self.normalized = self.latin
+    self
+  end
 end

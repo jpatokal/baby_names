@@ -19,6 +19,14 @@ module Locale
       end
     end
 
+    describe '#normalize!' do
+
+      it "should map R/L into wildcards" do
+        name = JapaneseName.create(:latin => "Abcdefghijklmnopqrstuvwxyz").normalize!
+        name.normalized.should == "Abcdefghijk_mnopq_stuvwxyz"
+      end
+    end
+
   end
 
 end
