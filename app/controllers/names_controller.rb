@@ -1,4 +1,6 @@
 class NamesController < ApplicationController
+  before_filter :default_language
+
   def index
     @language = Language.find(params[:language_id])
     @names = @language.names
@@ -47,6 +49,12 @@ class NamesController < ApplicationController
       format.html { redirect_to language_names_path(@language) }
       format.xml { head :ok }
     end
+  end
+
+  private
+  
+  def default_language
+    params[:language_id] = 1 unless params[:language_id]
   end
 
 end
