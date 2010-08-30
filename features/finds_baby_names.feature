@@ -9,7 +9,7 @@ Scenario: Find a name for a Japanese-Finnish girl
   And the language "Finnish" exists
   And that there is "Finnish" name called "Elina"
 
-  When I go to "/"
+  When I go to the home page
   And I select "Japanese" from "First language"
   And I select "Finnish" from "Second language"
   And I select "Girl" from "Gender"
