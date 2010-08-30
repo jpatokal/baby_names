@@ -34,4 +34,9 @@ describe Name do
 
   end
 
+  describe '#permutations' do
+    it "should return an array containing the normalized name" do
+      Name.create(:normalized => "Foo").permutations.should == [ "Foo" ]
+    end
+  end
 end

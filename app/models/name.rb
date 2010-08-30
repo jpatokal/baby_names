@@ -2,7 +2,7 @@ class Name < ActiveRecord::Base
   belongs_to :language
 
   def ==(name)
-    self.normalized == name.normalized
+    (permutations & name.permutations).any?
   end
 
   def normalize!
@@ -12,5 +12,9 @@ class Name < ActiveRecord::Base
 
   def save
     self.normalize! unless self.normalized
+  end
+
+  def permutations
+    [ self.normalized ]
   end
 end
