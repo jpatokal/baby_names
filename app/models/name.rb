@@ -6,15 +6,15 @@ class Name < ActiveRecord::Base
   end
 
   def normalize!
-    self.normalized = self.latin
+    self.normalized = latin
     self
   end
 
   def save
-    self.normalize! unless self.normalized
+    normalize! unless normalized
   end
 
   def permutations
-    [ self.normalized ]
+    [ normalized ]
   end
 end
