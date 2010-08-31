@@ -1,6 +1,6 @@
 <h1>Cross-Cultural Baby Names</h1>
 
-<% form_tag(names_path, :method => "get") do %> 
+<% form_tag(search_path, :method => "get") do %> 
 
 <%= label_tag(:language_first, "First language:") %> 
 <%= collection_select(:language, :first, Language.all, :id, :english) %>

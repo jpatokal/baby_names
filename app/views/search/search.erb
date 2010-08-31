@@ -1,0 +1,18 @@
+<h1>Names</h1>
+
+<table>
+  <tr>
+    <th>Script</th>
+    <th>Latin</th>
+    <th>Normalized</th>
+  </tr>
+
+<% for name in @names %>
+  <tr>
+    <td><%=h name.script %></td>
+    <td><%=h name.latin %></td>
+    <td><%=h name.normalized %></td>
+  </tr>
+<% end %>
+</table>
+
