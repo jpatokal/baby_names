@@ -13,7 +13,7 @@ Scenario: Find a name for a Japanese-Finnish girl
   And I select "Japanese" from "First language"
   And I select "Finnish" from "Second language"
   And I select "Girl" from "Gender"
-  And I press "Find"
+  And I press "Search"
 
   Then the search results contain the following information:
     | Japanese | Finnish |
