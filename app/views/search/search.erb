@@ -2,16 +2,16 @@
 
 <table>
   <tr>
-    <th>Script</th>
-    <th>Latin</th>
-    <th>Normalized</th>
+    <th colspan=2><%=h Language.find(@first).english %></th>
+    <th colspan=2><%=h Language.find(@second).english %></th>
   </tr>
 
-<% for name in @names %>
+<% for result in @results %>
   <tr>
-    <td><%=h name.script %></td>
-    <td><%=h name.latin %></td>
-    <td><%=h name.normalized %></td>
+    <td><%=h result[0].script %></td>
+    <td><%=h result[0].latin %></td>
+    <td><%=h result[1].script %></td>
+    <td><%=h result[1].latin %></td>
   </tr>
 <% end %>
 </table>

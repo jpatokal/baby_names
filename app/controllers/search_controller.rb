@@ -3,10 +3,10 @@ class SearchController < ApplicationController
     @first = Language.find(params[:language][:first])
     @second = Language.find(params[:language][:second])
 
-    @names = []
+    @results = []
     @first.locale_names.each do |name1|
       @second.locale_names.each do |name2|
-        @names << name1 if name1 == name2
+        @results << [name1, name2] if name1 == name2
       end
     end
   end
