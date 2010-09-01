@@ -2,14 +2,17 @@
 
 <% form_tag(search_path, :method => "get") do %> 
 
-<%= label_tag(:language_first, "The name should be") %> 
+<%= label_tag(:gender_id, "The baby will be a") %> 
+<%= select( :gender, :id, { "boy" => "M", "girl" => "F"}) %>
+
+<%= label_tag(:language_first, "and the name should be both") %> 
 <%= collection_select(:language, :first, Language.all, :id, :english) %>
 
 <%= label_tag(:language_second, "and") %> 
-<%= collection_select(:language, :second, Language.all, :id, :english) %>
+<%= collection_select(:language, :second, Language.all, :id, :english, { :selected => 2 }) %>
 
-<%= label_tag(:gender_id, "and for a") %> 
-<%= select( :gender, :id, { "Boy" => "M", "Girl" => "F"}) %>.
+<br/>
+<br/>
 
 <%= submit_tag("Search") %> 
 
