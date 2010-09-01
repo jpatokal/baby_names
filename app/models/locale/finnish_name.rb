@@ -1,5 +1,5 @@
 module Locale
-  class FinnishName < Name
+  class FinnishName < Locale::Name
     belongs_to :language
 
     def normalize!

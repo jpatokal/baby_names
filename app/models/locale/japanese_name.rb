@@ -1,5 +1,5 @@
 module Locale
-  class JapaneseName < Name
+  class JapaneseName < Locale::Name
     belongs_to :language
 
     WILDCARD = "[rl]"
