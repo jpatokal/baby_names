@@ -19,11 +19,8 @@ class NamesController < ApplicationController
   def create
     @language = Language.find(params[:language_id])
     @name = @language.names.build(params[:name])
-    if @name.save
-      redirect_to language_name_url(@language, @name)
-    else
-      render :action => "new"
-    end
+    @name.save!
+    redirect_to language_name_url(@language, @name)
   end
 
   def edit
