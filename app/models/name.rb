@@ -1,6 +1,12 @@
 class Name < ActiveRecord::Base
   belongs_to :language
 
+  def self.create_with_locale(locale, hash)
+    name = Name.create(hash)
+    name.extend locale
+    name.normalize!
+  end
+
   def ==(name)
     (permutations & name.permutations).any?
   end

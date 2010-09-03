@@ -1,7 +1,5 @@
 module Locale
-  class FinnishName < Locale::Name
-    belongs_to :language
-
+  module Finnish
     def normalize!
       self.normalized = self.latin.gsub('j', 'y').gsub('J', 'Y')
       self

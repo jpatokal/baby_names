@@ -2,9 +2,11 @@ class Language < ActiveRecord::Base
   validates_presence_of :english, :local
   has_many :names
 
-  def locale_names 
+  def locale_names
+    locale = eval("Locale::#{english}") rescue nil
+    return names unless locale
     names.map do |name|
-      eval("Locale::#{english}Name.from_name(name)")
+      name.extend locale
     end
   end
 end

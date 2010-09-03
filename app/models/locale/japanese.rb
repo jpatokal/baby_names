@@ -1,7 +1,5 @@
 module Locale
-  class JapaneseName < Locale::Name
-    belongs_to :language
-
+  module Japanese
     WILDCARD = "[rl]"
     
     def normalize!
