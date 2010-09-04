@@ -41,9 +41,32 @@ describe Name do
       Name.create(:gender => 'M').should_not be_female
     end
   end
+ 
+  describe '#gender_from_string!' do
+    it "should set a boy to male" do
+      name = Name.create.gender_from_string!('boy')
+      name.should be_male
+    end
 
-  describe '#normalize' do
+    it "should set a girl to female" do
+      name = Name.create.gender_from_string!('girl')
+      name.should be_female
+    end
 
+    it "should set unisex to unisex" do
+      name = Name.create.gender_from_string!('unisex')
+      name.should be_male
+      name.should be_female
+    end
+
+    it "should raise exception for an unknown gender" do
+      lambda {
+        name = Name.create.gender_from_string!('klingon')
+      }.should raise_error
+    end
+  end
+
+  describe '#normalize!' do
     it "should set the normalized name to the latin name" do
       Name.create(:latin => "Foo", :normalized => "Bar").normalize!.should == Name.create(:normalized => "Foo")
     end

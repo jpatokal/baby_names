@@ -23,6 +23,21 @@ class Name < ActiveRecord::Base
     ['F', 'U'].include? gender
   end
 
+  def gender_from_string!(string)
+    self.gender =
+      case string.downcase
+      when "girl" || "female"
+        'F'
+      when "boy" || "male"
+        'M'
+      when 'unisex'
+        'U'
+      else
+        raise "Unknown gender"
+      end
+    self
+  end
+
   def normalize!
     self.normalized = latin
     self
