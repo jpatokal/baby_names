@@ -64,10 +64,6 @@ class Name < ActiveRecord::Base
     errors.add("gender", "must be one of M, F, U") unless ['M', 'F', 'U'].include? gender
   end
 
-  def save
-    #
-  end
-
   def permutations
     [ normalized ]
   end
