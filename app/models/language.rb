@@ -6,7 +6,7 @@ class Language < ActiveRecord::Base
     locale = eval("Locale::#{english}") rescue nil
     return names unless locale
     names.map do |name|
-      name.extend locale
+      name.extend(locale).normalize!
     end
   end
 end

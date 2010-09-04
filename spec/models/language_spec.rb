@@ -5,6 +5,11 @@ describe Language do
   describe "#locale_names" do
     describe "if the locale is known" do
       module Locale::Test
+        def normalize!
+          self.normalized = "normal"
+          self
+        end
+
         def permutations
           [ "locale name" ]
         end
@@ -19,6 +24,12 @@ describe Language do
 
       it "should return all names" do
         @locale_names.should include(@name1, @name2)
+      end
+
+      it "should return renormalize the names" do
+        @locale_names.each do |locale_name|
+          locale_name.normalized.should == "normal"
+        end
       end
 
       it "should use the permutations method in the locale" do
