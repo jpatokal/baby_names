@@ -23,7 +23,7 @@ describe Language do
       end
 
       it "should return all names" do
-        @locale_names.should include(@name1, @name2)
+        @locale_names.map {|name| name.id}.should include(@name1.id, @name2.id)
       end
 
       it "should return renormalize the names" do
