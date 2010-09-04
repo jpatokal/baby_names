@@ -1,18 +1,22 @@
 class Name < ActiveRecord::Base
   belongs_to :language
 
-  def self.create_with_locale(locale, hash)
-    name = Name.create(hash)
-    name.extend locale
-    name.normalize!
-  end
-
   def after_initialize
     self.gender = 'U' unless gender
+    if language_id
+      english = Language.find(language_id).english
+      locale = eval("Locale::#{english}") rescue nil
+      self.extend(locale) if locale
+    end
+    self.normalize! unless normalized
   end
 
   def ==(name)
     (permutations & name.permutations).any? and compatible_gender?(name)
+  end
+
+  def locale
+    nil
   end
 
   def male?
@@ -61,7 +65,7 @@ class Name < ActiveRecord::Base
   end
 
   def save
-    normalize! unless normalized
+    #
   end
 
   def permutations

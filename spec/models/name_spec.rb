@@ -17,6 +17,12 @@ describe Name do
     end
   end
 
+  describe '#locale' do
+    it 'should return nil' do
+      Name.new.locale.should be_nil
+    end
+  end
+
   describe '#male?' do
     it 'should return true for a male name' do
       Name.create(:gender => 'M').should be_male
@@ -103,7 +109,9 @@ describe Name do
 
   describe '#normalize!' do
     it "should set the normalized name to the latin name" do
-      Name.create(:latin => "Foo", :normalized => "Bar").normalize!.should == Name.create(:normalized => "Foo")
+      name = Name.new(:latin => 'Foo', :normalized => 'Bar').normalize!
+
+      name.normalized.should == 'Foo'
     end
 
   end
@@ -114,20 +122,9 @@ describe Name do
     end
   end
 
-  describe '#save' do
-    it "should create a normalized name if none was given" do
-      Name.create(:latin => "Foo").normalized.should == "Foo"
-    end
-
-    it "should not create a normalized name if one was given" do
-      Name.create(:latin => "Foo", :normalized => "Bar").normalized.should == "Bar"
-    end
-
-  end
-
   describe '#permutations' do
     it "should return an array containing the normalized name" do
-      Name.create(:normalized => "Foo").permutations.should == [ "Foo" ]
+      Name.create(:latin => "Foo").permutations.should == [ "Foo" ]
     end
   end
 end

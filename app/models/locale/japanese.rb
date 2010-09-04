@@ -1,9 +1,13 @@
 module Locale
   module Japanese
     WILDCARD = "[rl]"
+
+    def locale
+      Locale::Japanese
+    end
     
     def normalize!
-      self.normalized = self.latin.gsub(Regexp.new(WILDCARD, Regexp::IGNORECASE), '_')
+      self.normalized = self.latin.gsub(Regexp.new(WILDCARD, Regexp::IGNORECASE), '_') if self.latin
       self
     end
 
