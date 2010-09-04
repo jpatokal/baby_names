@@ -15,7 +15,7 @@ Given /^that there is a "([^"]*)" name for a "([^"]*)" written "([^"]*)" and rea
   name = language.names.find_or_create_by_latin(latin)
   name.script = script
   name.gender_from_string!(gender)
-  name.save! if name.new_record?
+  name.save!
 end
 
 Then /^the search results contain the following information:$/ do |table|
