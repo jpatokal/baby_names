@@ -17,7 +17,7 @@ describe NamesController do
   end
 
   it "should create name" do
-    post :create, :name => { }, :language_id => @lang.id
+    post :create, :name => { :latin => 'Foo' }, :language_id => @lang.id
     response.should redirect_to language_name_path(assigns[:language], assigns[:name])
   end
 

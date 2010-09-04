@@ -1,5 +1,6 @@
 class Name < ActiveRecord::Base
   belongs_to :language
+  validates_presence_of :latin, :normalized, :gender
 
   def after_initialize
     self.gender = 'U' unless gender
@@ -61,6 +62,7 @@ class Name < ActiveRecord::Base
   end
 
   def validate
+    super
     errors.add("gender", "must be one of M, F, U") unless ['M', 'F', 'U'].include? gender
   end
 
