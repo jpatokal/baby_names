@@ -6,8 +6,10 @@ I can search for them at baby names
 Scenario: Find a name for a Japanese-Finnish girl with an exact match
   Given the language "Japanese" exists
   And that there is a "Japanese" name for a "girl" written "マリア" and read "Maria"
+  And that there is a "Japanese" name for a "girl" written "あき" and read "Aki"
   And the language "Finnish" exists
   And that there is a "Finnish" name for a "girl" called "Maria"
+  And that there is a "Finnish" name for a "boy" called "Aki"
 
   When I go to the home page
   And I select "girl" from "gender_id"
@@ -18,6 +20,9 @@ Scenario: Find a name for a Japanese-Finnish girl with an exact match
   Then the search results contain the following information:
     | Japanese-script | Japanese-latin | Finnish-script | Finnish-latin |
     | マリア           | Maria          | Maria          | Maria         |
+  And the search results do not contain the following information:
+    | Japanese-script | Japanese-latin | Finnish-script | Finnish-latin |
+    | あき             | Aki            | Aki            | Aki          |
 
 Scenario: Find a name for a Japanese-Finnish girl with a fuzzy match
   Given the language "Japanese" exists
