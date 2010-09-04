@@ -12,7 +12,7 @@ class Name < ActiveRecord::Base
   end
 
   def ==(name)
-    (permutations & name.permutations).any?
+    (permutations & name.permutations).any? and compatible_gender?(name)
   end
 
   def male?

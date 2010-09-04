@@ -12,6 +12,9 @@ describe Name do
       Name.create(:normalized => "Foo").should_not == Name.create(:normalized => "Bar")
     end
 
+    it "should not match if the gender is not compatible" do
+      Name.create(:gender => "M").should_not == Name.create(:gender => "F")
+    end
   end
 
   describe '#male?' do
