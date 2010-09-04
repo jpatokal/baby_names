@@ -7,13 +7,29 @@ class Name < ActiveRecord::Base
     name.normalize!
   end
 
+  def after_initialize
+    self.gender = 'U' unless gender
+  end
+
   def ==(name)
     (permutations & name.permutations).any?
+  end
+
+  def male?
+    ['M', 'U'].include? gender
+  end
+
+  def female?
+    ['F', 'U'].include? gender
   end
 
   def normalize!
     self.normalized = latin
     self
+  end
+
+  def validate
+    errors.add("gender", "must be one of M, F, U") unless ['M', 'F', 'U'].include? gender
   end
 
   def save

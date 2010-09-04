@@ -14,6 +14,34 @@ describe Name do
 
   end
 
+  describe '#male?' do
+    it 'should return true for a male name' do
+      Name.create(:gender => 'M').should be_male
+    end
+
+    it 'should return true for a unisex name' do
+      Name.create(:gender => 'U').should be_male
+    end
+
+    it 'should return false for a female name' do
+      Name.create(:gender => 'F').should_not be_male
+    end
+  end
+
+  describe '#female?' do
+    it 'should return true for a female name' do
+      Name.create(:gender => 'F').should be_female
+    end
+
+    it 'should return true for a unisex name' do
+      Name.create(:gender => 'U').should be_female
+    end
+
+    it 'should return false for a male name' do
+      Name.create(:gender => 'M').should_not be_female
+    end
+  end
+
   describe '#normalize' do
 
     it "should set the normalized name to the latin name" do
@@ -22,8 +50,13 @@ describe Name do
 
   end
 
-  describe '#save' do
+  describe '#validate' do
+    it "should reject unknown genders" do
+      Name.new(:gender => 'X').validate.should_not be_empty
+    end
+  end
 
+  describe '#save' do
     it "should create a normalized name if none was given" do
       Name.create(:latin => "Foo").normalized.should == "Foo"
     end
