@@ -25,3 +25,12 @@ Then /^the search results contain the following information:$/ do |table|
     end
   end
 end
+
+Then /^the search results do not contain the following information:$/ do |table|
+  # table is a Cucumber::Ast::Table
+  table.rows.each do |row|
+    row.each do |column|
+      Then "I should not see \"#{column}\""
+    end
+  end
+end
