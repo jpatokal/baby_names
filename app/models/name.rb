@@ -23,6 +23,19 @@ class Name < ActiveRecord::Base
     ['F', 'U'].include? gender
   end
 
+  def unisex?
+    gender == 'U'
+  end
+
+  def compatible_gender?(name)
+    return true if unisex?
+    if male?
+      name.male?
+    else
+      name.female?
+    end
+  end
+
   def gender_from_string!(string)
     self.gender =
       case string.downcase

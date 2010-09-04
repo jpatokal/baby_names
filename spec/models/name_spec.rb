@@ -41,7 +41,39 @@ describe Name do
       Name.create(:gender => 'M').should_not be_female
     end
   end
+
+  describe '#unisex?' do
+    it 'should return true for a unisex name' do
+      Name.create(:gender => 'U').should be_unisex
+    end
+
+    it 'should return false for anything else' do
+      Name.create(:gender => 'X').should_not be_unisex
+    end
+  end
  
+  describe '#compatible_gender?' do
+    [
+     { :first => 'M', :second => 'M', :expected_result => true },
+     { :first => 'M', :second => 'F', :expected_result => false },
+     { :first => 'M', :second => 'U', :expected_result => true },
+     { :first => 'F', :second => 'F', :expected_result => true },
+     { :first => 'F', :second => 'M', :expected_result => false },
+     { :first => 'F', :second => 'U', :expected_result => true },
+     { :first => 'U', :second => 'M', :expected_result => true },
+     { :first => 'U', :second => 'F', :expected_result => true },
+     { :first => 'U', :second => 'U', :expected_result => true },
+    ].each do |combo|
+      describe "for names with genders #{combo[:first]}, #{combo[:second]}" do
+        it "should return #{combo[:expected_result]}" do
+          first = Name.create(:gender => combo[:first])
+          second = Name.create(:gender => combo[:second])
+          first.compatible_gender?(second).should == combo[:expected_result]
+        end
+      end
+    end
+  end
+
   describe '#gender_from_string!' do
     it "should set a boy to male" do
       name = Name.create.gender_from_string!('boy')
