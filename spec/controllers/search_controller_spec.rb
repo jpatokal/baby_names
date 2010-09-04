@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SearchController do
-  describe "if two valid languages and matching names are given" do
+  describe "if two valid languages are given" do
     before do
       @lang1 = Language.create(:english => 'Foo 1', :local => 'Bar 1')
       @name1 = @lang1.names.create(:latin => 'Name', :normalized => 'Match', :gender => 'M')
@@ -10,7 +10,7 @@ describe SearchController do
       @lang2 = Language.create(:english => 'Foo 2', :local => 'Bar 2')
       @name2 = @lang2.names.create(:latin => 'Name', :normalized => 'Match', :gender => 'M')
 
-      get :search, :language => {:first => @lang1.id, :second => @lang2.id }
+      get :search, :language => {:first => @lang1.id, :second => @lang2.id }, :gender => {:id => 'M'}
     end
 
     it "should return success" do
