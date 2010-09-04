@@ -3,7 +3,7 @@ class Name < ActiveRecord::Base
   validates_presence_of :latin, :normalized, :gender
 
   def after_initialize
-    self.gender = 'U' unless gender
+    self.gender = gender ? gender_string_to_code(gender) : 'U'
     if language_id
       english = Language.find(language_id).english
       locale = eval("Locale::#{english}") rescue nil
@@ -41,21 +41,6 @@ class Name < ActiveRecord::Base
     end
   end
 
-  def gender_from_string!(string)
-    self.gender =
-      case string.downcase
-      when "girl" || "female"
-        'F'
-      when "boy" || "male"
-        'M'
-      when 'unisex'
-        'U'
-      else
-        raise "Unknown gender"
-      end
-    self
-  end
-
   def normalize!
     self.normalized = latin
     self
@@ -68,5 +53,20 @@ class Name < ActiveRecord::Base
 
   def permutations
     [ normalized ]
+  end
+
+  private
+
+  def gender_string_to_code(string)
+    case string.downcase
+    when 'f', 'girl', 'female'
+      'F'
+    when 'm', 'boy', 'male'
+      'M'
+    when 'u', 'unisex'
+      'U'
+    else
+      raise "Unknown gender #{string.inspect}"
+    end
   end
 end

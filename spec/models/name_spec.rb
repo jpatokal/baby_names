@@ -13,7 +13,7 @@ describe Name do
     end
 
     it "should not match if the gender is not compatible" do
-      Name.create(:gender => "M").should_not == Name.create(:gender => "F")
+      Name.create(:gender => 'boy').should_not == Name.create(:gender => "F")
     end
   end
 
@@ -25,53 +25,54 @@ describe Name do
 
   describe '#male?' do
     it 'should return true for a male name' do
-      Name.create(:gender => 'M').should be_male
+      Name.create(:gender => 'boy').should be_male
     end
 
     it 'should return true for a unisex name' do
-      Name.create(:gender => 'U').should be_male
+      Name.create(:gender => 'unisex').should be_male
     end
 
     it 'should return false for a female name' do
-      Name.create(:gender => 'F').should_not be_male
+      Name.create(:gender => 'girl').should_not be_male
     end
   end
 
   describe '#female?' do
     it 'should return true for a female name' do
-      Name.create(:gender => 'F').should be_female
+      Name.create(:gender => 'girl').should be_female
     end
 
     it 'should return true for a unisex name' do
-      Name.create(:gender => 'U').should be_female
+      Name.create(:gender => 'unisex').should be_female
     end
 
     it 'should return false for a male name' do
-      Name.create(:gender => 'M').should_not be_female
+      Name.create(:gender => 'boy').should_not be_female
     end
   end
 
   describe '#unisex?' do
     it 'should return true for a unisex name' do
-      Name.create(:gender => 'U').should be_unisex
+      Name.create(:gender => 'unisex').should be_unisex
     end
 
     it 'should return false for anything else' do
-      Name.create(:gender => 'X').should_not be_unisex
+      Name.create(:gender => 'boy').should_not be_unisex
+      Name.create(:gender => 'girl').should_not be_unisex
     end
   end
  
   describe '#compatible_gender?' do
     [
-     { :first => 'M', :second => 'M', :expected_result => true },
-     { :first => 'M', :second => 'F', :expected_result => false },
-     { :first => 'M', :second => 'U', :expected_result => true },
-     { :first => 'F', :second => 'F', :expected_result => true },
-     { :first => 'F', :second => 'M', :expected_result => false },
-     { :first => 'F', :second => 'U', :expected_result => true },
-     { :first => 'U', :second => 'M', :expected_result => true },
-     { :first => 'U', :second => 'F', :expected_result => true },
-     { :first => 'U', :second => 'U', :expected_result => true },
+     { :first => 'boy'   , :second => 'boy'   , :expected_result => true },
+     { :first => 'boy'   , :second => 'girl'  , :expected_result => false },
+     { :first => 'boy'   , :second => 'unisex', :expected_result => true },
+     { :first => 'girl'  , :second => 'girl'  , :expected_result => true },
+     { :first => 'girl'  , :second => 'boy'   , :expected_result => false },
+     { :first => 'girl'  , :second => 'unisex', :expected_result => true },
+     { :first => 'unisex', :second => 'boy'   , :expected_result => true },
+     { :first => 'unisex', :second => 'girl'  , :expected_result => true },
+     { :first => 'unisex', :second => 'unisex', :expected_result => true },
     ].each do |combo|
       describe "for names with genders #{combo[:first]}, #{combo[:second]}" do
         it "should return #{combo[:expected_result]}" do
@@ -83,26 +84,22 @@ describe Name do
     end
   end
 
-  describe '#gender_from_string!' do
+  describe '#after_initialize' do
     it "should set a boy to male" do
-      name = Name.create.gender_from_string!('boy')
-      name.should be_male
+      Name.create(:gender => 'boy').should be_male
     end
 
     it "should set a girl to female" do
-      name = Name.create.gender_from_string!('girl')
-      name.should be_female
+      Name.create(:gender => 'girl').should be_female
     end
 
-    it "should set unisex to unisex" do
-      name = Name.create.gender_from_string!('unisex')
-      name.should be_male
-      name.should be_female
+    it "should set a girl to female" do
+      Name.create(:gender => 'unisex').should be_unisex
     end
 
     it "should raise exception for an unknown gender" do
       lambda {
-        name = Name.create.gender_from_string!('klingon')
+        name = Name.create(:gender => 'klingon')
       }.should raise_error
     end
   end
@@ -118,7 +115,9 @@ describe Name do
 
   describe '#validate' do
     it "should reject unknown genders" do
-      Name.new(:gender => 'X').validate.should_not be_empty
+      name = Name.new
+      name.gender = 'X'
+      name.validate.should_not be_empty
     end
   end
 
