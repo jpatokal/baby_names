@@ -38,7 +38,6 @@ describe NamesController do
     end
     
     it "should update name" do
-      pending
       put :update, :id => @name.id, :language_id => @lang.id, :name => { }
       response.should redirect_to language_name_path(assigns[:language], assigns[:name])
     end

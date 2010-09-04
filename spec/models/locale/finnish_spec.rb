@@ -5,7 +5,6 @@ module Locale
 
     before do
       @finnish = Language.create(:english => 'Finnish', :local => 'Suomi')
-      @finnish.save!
     end
 
     describe '#locale' do
@@ -15,15 +14,10 @@ module Locale
     end
 
     describe '#normalize!' do
-
       it "should map J into Y" do
         name = @finnish.names.create(:latin => "Jani")
         name.normalized.should == "Yani"
       end
-    end
-
-    after do
-      @finnish.destroy
     end
   end
 

@@ -5,13 +5,10 @@ describe SearchController do
     before do
       @lang1 = Language.create(:english => 'Foo 1', :local => 'Bar 1')
       @name1 = @lang1.names.create(:latin => 'Name', :normalized => 'Match', :gender => 'M')
-      @name1.save!
       @red_herring = @lang1.names.create(:latin => 'Wrong gender', :normalized => 'Match', :gender => 'F')
-      @red_herring.save!
 
       @lang2 = Language.create(:english => 'Foo 2', :local => 'Bar 2')
       @name2 = @lang2.names.create(:latin => 'Name', :normalized => 'Match', :gender => 'M')
-      @name2.save!
 
       get :search, :language => {:first => @lang1.id, :second => @lang2.id }
     end

@@ -5,7 +5,6 @@ module Locale
 
     before do
       @japanese = Language.create(:english => 'Japanese', :local => '日本語')
-      @japanese.save!
     end
 
     describe '#locale' do
@@ -15,7 +14,6 @@ module Locale
     end
 
     describe '#normalize!' do
-
       it "should map R/L into wildcards" do
         @japanese.names.create(:latin => "Abcdefghijklmnopqrstuvwxyz").normalized.should == "Abcdefghijk_mnopq_stuvwxyz"
       end
@@ -34,10 +32,6 @@ module Locale
           @japanese.names.create(:latin => "Arila").permutations.should include("Arira", "Arila", "Alira", "Alila")
         end
       end
-    end
-
-    after do
-      @japanese.destroy
     end
   end
 end
