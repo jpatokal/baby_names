@@ -7,8 +7,10 @@ Scenario: Find a name for a Japanese-Finnish girl with an exact match
   Given the language "Japanese" exists
   And that there is a "Japanese" name for a "girl" written "マリア" and read "Maria"
   And that there is a "Japanese" name for a "girl" written "あき" and read "Aki"
+  And that there is a "Japanese" name for a "unisex" written "泉" and read "Izumi"
   And the language "Finnish" exists
   And that there is a "Finnish" name for a "girl" called "Maria"
+  And that there is a "Finnish" name for a "girl" called "Izumi"
   And that there is a "Finnish" name for a "boy" called "Aki"
 
   When I go to the home page
@@ -20,6 +22,7 @@ Scenario: Find a name for a Japanese-Finnish girl with an exact match
   Then the search results contain the following information:
     | Japanese-script | Japanese-latin | Finnish-script | Finnish-latin |
     | マリア           | Maria          | Maria          | Maria         |
+    | 泉              | Izumi          | Izumi          | Izumi         |
   And the search results do not contain the following information:
     | Japanese-script | Japanese-latin | Finnish-script | Finnish-latin |
     | あき             | Aki            | Aki            | Aki          |
