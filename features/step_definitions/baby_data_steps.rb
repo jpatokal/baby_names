@@ -14,6 +14,7 @@ Given /^that there is a "([^"]*)" name for a "([^"]*)" written "([^"]*)" and rea
   language = Language.find_by_english(language_name)
   name = language.names.find_or_create_by_latin(latin)
   name.script = script
+  name.gender_from_string!(gender)
   name.save! if name.new_record?
 end
 
