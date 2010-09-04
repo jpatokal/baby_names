@@ -4,9 +4,8 @@ class Name < ActiveRecord::Base
 
   def after_initialize
     self.gender = gender ? gender_string_to_code(gender) : 'U'
-    if language_id
-      english = Language.find(language_id).english
-      locale = eval("Locale::#{english}") rescue nil
+    if language_id?
+      locale = eval("Locale::#{language.english}") rescue nil
       self.extend(locale) if locale
     end
     self.normalize! unless normalized
