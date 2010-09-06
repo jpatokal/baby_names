@@ -5,13 +5,14 @@ class SearchController < ApplicationController
     @gender = params[:gender][:id]
 
     @results = []
-    first_names = @first.names.find_all_by_gender([@gender, 'U'])
-    second_names = @second.names.find_all_by_gender([@gender, 'U'])
-    first_names.each do |name1|
-      name2 = second_names.find {|name| name1 == name}
-      if name2
-        @results << [name1, name2]
-      end
+    Name.all(:select    => "names.*, n2.id AS id2",
+             :joins     => "JOIN names AS n2 
+                              ON n2.normalized LIKE names.normalized AND n2.id != names.id",
+             :conditions => ["names.language_id=? AND n2.language_id=? AND names.gender IN (?, 'U') AND n2.gender IN (?, 'U')",
+                             @first.id, @second.id, @gender, @gender]
+             ).each do |name|
+      name2 = Name.find(name.id2)
+      @results << [ name, name2 ] #if name == name2
     end
   end
 end

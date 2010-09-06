@@ -4,11 +4,14 @@ describe SearchController do
   describe "if two valid languages are given" do
     before do
       @lang1 = Language.create(:english => 'Foo 1', :local => 'Bar 1')
-      @name1 = @lang1.names.create(:latin => 'Name', :normalized => 'Match', :gender => 'M')
-      @red_herring = @lang1.names.create(:latin => 'Wrong gender', :normalized => 'Match', :gender => 'F')
+      @names = []
+      @names << @lang1.names.create(:latin => 'Male', :normalized => 'Match', :gender => 'M')
+      @names << @lang1.names.create(:latin => 'Unisex', :normalized => 'Match2', :gender => 'U')
+      @red_herring = @lang1.names.create(:latin => 'Female', :normalized => 'Match', :gender => 'F')
 
       @lang2 = Language.create(:english => 'Foo 2', :local => 'Bar 2')
-      @name2 = @lang2.names.create(:latin => 'Name', :normalized => 'Match', :gender => 'M')
+      @names << @lang2.names.create(:latin => 'Male', :normalized => 'Match', :gender => 'M')
+      @names << @lang2.names.create(:latin => 'Male', :normalized => 'Match2', :gender => 'M')
 
       get :search, :language => {:first => @lang1.id, :second => @lang2.id }, :gender => {:id => 'M'}
     end
@@ -18,7 +21,9 @@ describe SearchController do
     end
 
     it "should get list of matches" do
-      assigns[:results].flatten.should include(@name1, @name2)
+      @names.each do |name|
+        assigns[:results].flatten.should include name
+      end
     end
 
     it "should exclude different genders" do
