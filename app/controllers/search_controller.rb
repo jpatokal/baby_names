@@ -12,7 +12,7 @@ class SearchController < ApplicationController
                              @first.id, @second.id, @gender, @gender]
              ).each do |name|
       name2 = Name.find(name.id2)
-      @results << [ name, name2 ] #if name == name2
+      @results << [ name, name2 ] if name == name2
     end
   end
 end
