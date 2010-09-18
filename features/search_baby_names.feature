@@ -4,11 +4,11 @@ As a parent-to-be
 I can search for them at baby names
 
 Scenario: Find a name for a Japanese-Finnish girl with an exact match
-  Given the language "Japanese" exists
+  Given the "wildcard" language "Japanese" exists
   And that there is a "Japanese" name for a "girl" written "マリア" and read "Maria"
   And that there is a "Japanese" name for a "girl" written "あき" and read "Aki"
   And that there is a "Japanese" name for a "unisex" written "泉" and read "Izumi"
-  And the language "Finnish" exists
+  And the "simple" language "Finnish" exists
   And that there is a "Finnish" name for a "girl" called "Maria"
   And that there is a "Finnish" name for a "girl" called "Izumi"
   And that there is a "Finnish" name for a "boy" called "Aki"
@@ -28,9 +28,9 @@ Scenario: Find a name for a Japanese-Finnish girl with an exact match
     | あき             | Aki            | Aki            | Aki          |
 
 Scenario: Find a name for a Japanese-Finnish girl with a fuzzy match
-  Given the language "Japanese" exists
+  Given the "wildcard" language "Japanese" exists
   And that there is a "Japanese" name for a "girl" written "えりな" and read "Erina"
-  And the language "Finnish" exists
+  And the "simple" language "Finnish" exists
   And that there is a "Finnish" name for a "girl" called "Elina"
 
   When I go to the home page

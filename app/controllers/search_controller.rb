@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     @results = []
     Name.all(:select    => "names.*, n2.id AS id2",
              :joins     => "JOIN names AS n2 
-                              ON n2.normalized LIKE names.normalized AND n2.id != names.id",
+                              ON #{@first.join_condition(@second)} AND n2.id != names.id",
              :conditions => ["names.language_id=? AND n2.language_id=? AND names.gender IN (?, 'U') AND n2.gender IN (?, 'U')",
                              @first.id, @second.id, @gender, @gender]
              ).each do |name|

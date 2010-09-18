@@ -1,9 +1,8 @@
-Given /^the language "([^"]*)" exists$/ do |language_name|
+Given /^the "([^"]*)" language "([^"]*)" exists$/ do |type, language_name|
   language = Language.find_or_create_by_english(language_name)
-  if language.new_record?
-    language.local = "Local"
-    language.save!
-  end
+  language.local = "Local"
+  language.wildcards = (type == "wildcard")
+  language.save!
 end
 
 Given /^that there is a "([^"]*)" name for a "([^"]*)" called "([^"]*)"$/ do |language_name, gender, name|
